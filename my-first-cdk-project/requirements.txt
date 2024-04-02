@@ -1,2 +1,0 @@
--e .
-aws_cdk.aws_s3
