@@ -1,6 +1,7 @@
 {
   "app": "python3 app.py",
-  "versionReporting": false,
+  "analyticsReporting": false,
+  "profile": "service-account",
   "watch": {
     "include": [
       "**"
@@ -16,6 +17,22 @@
     ]
   },
   "context": {
+    "env":{
+      "dev":{
+        "region":"eu-central-1",
+        "account":"767397659547"
+      },
+      "prod":{
+        "region":"eu-central-1",
+        "account":"767397961903",
+        "encryption":true,
+        "vpc_config":{
+          "vpc_cidr":"10.0.0.0/16",
+          "subnet_mask":24,
+          "set_reserve":false
+        }
+      }
+    },
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [

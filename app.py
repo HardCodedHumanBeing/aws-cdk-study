@@ -6,12 +6,16 @@ from aws_cdk import(
     Environment
 )
 from aws_cdk_study.aws_cdk_study_stack import MyArtifactBucketStack
-
-env_Frankfurt = Environment(region="eu-central-1")
-env_London = Environment(region="eu-west-2")
+from resource_stacks.custom_vpc import CustomVpcStack
 
 app = cdk.App()
-MyArtifactBucketStack(app, "myDevStack", env=env_Frankfurt)
-MyArtifactBucketStack(app, "myProdStack", is_prod=True, env=env_London)
+
+# env_Prod = Environment(account=app.node.try_get_context('env')['prod']['account'],region=app.node.try_get_context('env')['prod']['region'])
+# env_Dev = Environment(account=app.node.try_get_context('env')['dev']['account'],region=app.node.try_get_context('env')['dev']['region'])
+
+# MyArtifactBucketStack(app, "myDevStack", env=env_Dev)
+# MyArtifactBucketStack(app, "myProdStack", is_prod=True, env=env_Prod)
+
+CustomVpcStack(app,"my-custom-vpc-stack")
 
 app.synth()
